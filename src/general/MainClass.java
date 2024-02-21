@@ -33,7 +33,7 @@ public class MainClass {
 		
 	}
 
-	public static void main(String[] args) {
+	public void Bigger() { //Method to check bigger between two number
 		int a, b, c;
 		
 		a = 10;
@@ -60,7 +60,26 @@ public class MainClass {
 		System.out.println("The final numbers is: "+c);
 		
 		entries.close();
+		
+	}
+	
+	public static void main(String[] args) {
+		
+		int a=0;
 
+		Scanner entries = new Scanner(System.in);
+		
+		System.out.println("Choose a number from 1 to 10");
+		a = entries.nextInt();
+		
+		while( a!=3) { //There will be a loop until the user insert the number 3
+			System.out.println("\n Wrong number!! Try another one!");
+			a = entries.nextInt();
+		}
+		
+		System.out.println("Great!! The right number is 3. You did it!");
+		
+		entries.close();
 	}
 
 }
