@@ -1,7 +1,7 @@
 package general;
 
 import java.util.Scanner;
-
+import transporte.Linha;
 
 public class MainClass {
 	
@@ -63,8 +63,7 @@ public class MainClass {
 		
 	}
 	
-	public static void main(String[] args) {
-		
+	public void GuessNumber() {// Method to test while loop with a "guess the number" game
 		int a=0;
 
 		Scanner entries = new Scanner(System.in);
@@ -80,6 +79,30 @@ public class MainClass {
 		System.out.println("Great!! The right number is 3. You did it!");
 		
 		entries.close();
+		
+	}
+	
+	public static void main(String[] args) {
+		
+		Linha MpeFor = new Linha("67M"); //utilizando o construtor simples somente com o codigo
+		Linha MpeMar = new Linha("373M", "Maranguape/Maracanau"); //utilizando o construtor secundario, incluindo o nome da linha
+		
+		System.out.printf("A primeira linha: %s - %s%n", MpeFor.getCodigo(), MpeFor.getNome());
+		System.out.printf("A segunda linha: %s - %s%n", MpeMar.getCodigo(), MpeMar.getNome());
+		
+		MpeFor.setNome("Maranguape/Fortaleza");
+		MpeFor.setExtensao(27.4);
+		MpeFor.setTarifa_cheia(9.0);
+		
+		MpeMar.setExtensao(26.4);
+		MpeMar.setTarifa_cheia(2.15);
+		
+		System.out.printf("%nA primeira linha: %s - %s - %.1f KM - com tarifa principal de %.2f %n", MpeFor.getCodigo(), MpeFor.getNome(), MpeFor.getExtensao(), MpeFor.getTarifa_cheia());
+		System.out.printf("A segunda linha: %s - %s - %.1f KM - com tarifa principal de %.2f %n", MpeMar.getCodigo(), MpeMar.getNome(), MpeMar.getExtensao(), MpeMar.getTarifa_cheia());
+		
+		
+		
+		
 	}
 
 }
