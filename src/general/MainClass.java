@@ -117,6 +117,15 @@ public class MainClass {
 		
 		System.out.println("O cartao é: "+cartao);
 		System.out.println("O valor passagem é: R$"+valor);
+		
+		//Changing the string to StringBuffer for editing purposes
+		StringBuffer linha = new StringBuffer(passagens);
+		
+		linha.replace(65, 67, "54");
+		System.out.println("The new String is: "
+				+ linha.toString());
+		
+		
 	}
 
 }
