@@ -84,8 +84,8 @@ public class Examples {
 	
 	public void TestarLinhas() { //Method to test objects from class transporte.linha
 		
-		Linha MpeFor = new Linha("67M"); //utilizando o construtor simples somente com o codigo
-		Linha MpeMar = new Linha("373M", "Maranguape/Maracanau"); //utilizando o construtor secundario, incluindo o nome da linha
+		Linha MpeFor = new Linha("67M"); //using the simple constructor with one parameter
+		Linha MpeMar = new Linha("373M", "Maranguape/Maracanau"); //using the secondary constructor with the second parameter
 		
 		System.out.printf("A primeira linha: %s - %s%n", MpeFor.getCodigo(), MpeFor.getNome());
 		System.out.printf("A segunda linha: %s - %s%n", MpeMar.getCodigo(), MpeMar.getNome());

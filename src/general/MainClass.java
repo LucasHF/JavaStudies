@@ -14,7 +14,6 @@ public class MainClass {
 		
 		
 		
-		/*System.out.println("O valor passagem é: R$"+valor);*/
 		
 		//Changing the string to StringBuffer for editing purposes
 		StringBuffer registro = new StringBuffer(passagens);
@@ -24,12 +23,6 @@ public class MainClass {
 		linha = passagens.substring(1, 8);
 		cartao = passagens.substring(65, 67);
 		valor = passagens.substring(71, 76);
-		
-		System.out.println("O cartao é: "+cartao);
-		
-		/*linha.replace(65, 67, "54");
-		System.out.println("The new String is: "
-				+ linha.toString()); */
 		
 		TarifaChecker checker = new TarifaChecker();
 		
