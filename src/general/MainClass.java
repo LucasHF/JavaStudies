@@ -2,6 +2,7 @@ package general;
 
 import java.util.Scanner;
 import transporte.Linha;
+import transporte.TarifaChecker;
 
 public class MainClass {
 	
@@ -110,20 +111,32 @@ public class MainClass {
 				+ "0006669900066731I27/02/2024 08:06:1027/02/2024 09:16:06"
 				+ "   00000000,0027/02/202427/02/20240000,00";
 		
-		String cartao, valor;
 		
+		
+		/*System.out.println("O valor passagem é: R$"+valor);*/
+		
+		//Changing the string to StringBuffer for editing purposes
+		StringBuffer registro = new StringBuffer(passagens);
+		
+		String cartao, valor, linha, novoCartao;
+		
+		linha = passagens.substring(1, 8);
 		cartao = passagens.substring(65, 67);
 		valor = passagens.substring(71, 76);
 		
 		System.out.println("O cartao é: "+cartao);
-		System.out.println("O valor passagem é: R$"+valor);
 		
-		//Changing the string to StringBuffer for editing purposes
-		StringBuffer linha = new StringBuffer(passagens);
-		
-		linha.replace(65, 67, "54");
+		/*linha.replace(65, 67, "54");
 		System.out.println("The new String is: "
-				+ linha.toString());
+				+ linha.toString()); */
+		
+		TarifaChecker checker = new TarifaChecker();
+		
+		novoCartao = checker.Check(linha, cartao, valor);
+		
+		registro.replace(65, 67, novoCartao);
+		
+		System.out.println("O novo cartao é: "+novoCartao);
 		
 		
 	}
