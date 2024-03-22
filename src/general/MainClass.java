@@ -2,12 +2,11 @@ package general;
 
 import transporte.TarifaChecker;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Scanner;
 
 
 public class MainClass {
@@ -16,53 +15,51 @@ public class MainClass {
 	public static void main(String[] args) {
 		
 		String cartao, valor, linha, novoCartao, registro;
+		String relatorio = "C:\\Users\\Adm01\\Documents\\Teste passagens antigas.txt";
+		String modificado = "C:\\Users\\Adm01\\Documents\\ArquivoFinal.txt";
 		
-		/*try {
-		      File relatorio = new File("C:\\Users\\Adm01\\Documents\\Teste passagens antigas.txt"); //encontra o arquivo
-		      Scanner reader = new Scanner(relatorio); //objeto para ler as linhas
+		try {
+		      
+		      BufferedReader reader = new BufferedReader(new FileReader(relatorio)); //objeto para ler as linhas
+		      BufferedWriter destino = new BufferedWriter(new FileWriter(modificado)); //criando o buffered writer que fará toda a escrita no arquivo final
 		      TarifaChecker checker = new TarifaChecker(); //objeto para checar a necessidade de modificar o cartao
+		      StringBuilder registroBuilder = new StringBuilder(); //objeto auxiliar para fazer as modificacoes de cartao
 		      
-		      while (reader.hasNextLine()) {
-		    	  
-		      registro = reader.nextLine(); //obtem a próxima linha contendo um registro
+		      destino.write(reader.readLine()); //escreve de imediato a linha de cabeçalho
+		      destino.newLine();
 		      
-		      linha = registro.substring(1, 8);
-		      cartao = registro.substring(65, 67);
-		      valor = registro.substring(71, 76);
 		      
-		      novoCartao = checker.Check(linha, cartao, valor);
-		      
-		      StringBuffer registroBuffer = new StringBuffer(registro);
-		      registroBuffer.replace(65, 67, novoCartao);
+		      //loop a ser realizado para todos os registro de tarifa, ate encontrar o indicador de final de arquivo identificado pela letra C
+		      while (!(registro = reader.readLine()).equals("C")) {
+			      
+		    	  /*Indentificadores de linha, cartao e valor de passagem do registro atual*/
+			      linha = registro.substring(1, 8); 
+			      cartao = registro.substring(65, 67);
+			      valor = registro.substring(71, 76);
+			      
+			      novoCartao = checker.Check(linha, cartao, valor); //recebe o cartao que deve ser colocado no registro
+			      
+			      registroBuilder.delete(0, registroBuilder.length()); //esvazia o Builder
+			      registroBuilder.append(registro); //insere o registro atual
+			      registroBuilder.replace(65, 67, novoCartao); //realiza a modificacao do cartao
+			      
+			      destino.write(registroBuilder.toString()); //escreve o registro atual no destino
+			      destino.newLine();
 		      
 		      }
 		      
+		      destino.write(registro); //Escreve a linha final do arquivo no destino
+		      
+		      /*Fechando todos os buffers*/
 		      reader.close();
-		    } catch (FileNotFoundException e) {
+		      destino.close();
+		      
+		    } catch (IOException e) {
+		    	
 		      System.out.println("An error occurred:");
 		      e.printStackTrace();
-		    }*/
-		
-		try {
-			 File relatorio = new File("C:\\Users\\Adm01\\Documents\\ArquivoFinal.txt"); //encontra o arquivo
-			 if(!relatorio.exists()) {
-				 relatorio.createNewFile();
-			 }
-			FileWriter destino = new FileWriter(relatorio);
-			BufferedWriter bfDestino = new BufferedWriter(destino);
-			
-			bfDestino.write("B   373M  57018 171741 732320570041OPERACAO VALIDADOR"
-					+ "            24000101,90000001,900000000121/12/2021 06:15:0221/12/2021 "
-					+ "08:12:100006773300067789I21/12/2021 06:47:3721/12/2021 08:05:23   "
-					+ "00000000,0021/12/202121/12/20210000,00");
-			
-			bfDestino.close();
-			destino.close();
-			
-		}catch (IOException e) {
-		      System.out.println("An error occurred:");
-		      e.printStackTrace();
-		}
+		      
+		    }
 		
 	}
 
