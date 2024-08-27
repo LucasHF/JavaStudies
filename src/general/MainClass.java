@@ -15,7 +15,7 @@ public class MainClass {
 	public static void main(String[] args) {
 		
 		String cartao, valor, linha, novoCartao, registro;
-		String relatorio = "C:\\Users\\Adm01\\Documents\\Teste passagens antigas.txt";
+		String relatorio = "C:\\Users\\Adm01\\Documents\\TesteInteg.txt";
 		String modificado = "C:\\Users\\Adm01\\Documents\\ArquivoFinal.txt";
 		
 		try {
@@ -31,14 +31,21 @@ public class MainClass {
 		      
 		      //loop a ser realizado para todos os registro de tarifa, ate encontrar o indicador de final de arquivo identificado pela letra C
 		      while (!(registro = reader.readLine()).equals("C")) {
-			      
-		    	  /*Indentificadores de linha, cartao e valor de passagem do registro atual*/
-			      linha = registro.substring(1, 8); 
-			      cartao = registro.substring(65, 67);
-			      valor = registro.substring(71, 76);
-			      
-			      novoCartao = checker.Check(linha, cartao, valor); //recebe o cartao que deve ser colocado no registro
-			      
+		    	  
+		    	  /*Identificar se o registro foi uma integracao*/
+		    	  if(registro.charAt(190) == '1'){
+		    		  novoCartao = "-2";
+		    		  
+		    	  }else { //Caso nao seja integracao, verifica se é uma passagem antiga
+		    		  
+		    		  /*Indentificadores de linha, cartao e valor de passagem do registro atual*/
+				      linha = registro.substring(1, 8); 
+				      cartao = registro.substring(65, 67);
+				      valor = registro.substring(71, 76);
+				      
+				      novoCartao = checker.Check(linha, cartao, valor); //recebe o cartao que deve ser colocado no registro  
+		    	  }
+
 			      registroBuilder.delete(0, registroBuilder.length()); //esvazia o Builder
 			      registroBuilder.append(registro); //insere o registro atual
 			      registroBuilder.replace(65, 67, novoCartao); //realiza a modificacao do cartao
